@@ -25,7 +25,7 @@ module.exports = {
                         presets: ['react', 'es2015']
                     }
                 }
-            },{
+            }, {
                 test: /\.(jpg|png|gif)$/,
                 use: ["file-loader?name=assets/images/[name][hash].[ext]",
                     {
@@ -40,7 +40,16 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        'css-loader?sourceMap', {
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                                modules: true,
+                                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+
+                            }
+                        },
+                        {
                             loader: 'postcss-loader',
                             options: {
                                 plugins: function () {
