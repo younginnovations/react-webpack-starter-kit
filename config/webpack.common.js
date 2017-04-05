@@ -25,16 +25,13 @@ module.exports = {
                         presets: ['react', 'es2015']
                     }
                 }
-            }, {
-                test: /\.(eot|svg)$/,
-                loader: "file-loader?name=[name].[hash:20].[ext]"
-            }, {
-                test: /\.(jpg|png|gif|otf|ttf|woff|woff2|cur|ani)$/,
-                loader: "url-loader?name=images/[name].[hash:20].[ext]&limit=10000"
-            }, {
-                test: /\.(jpe?g|png|jpg)$/i,
-                exclude: 'node_modules',
-                loader: 'url-loader?limit=8192!img'
+            },{
+                test: /\.(jpg|png|gif)$/,
+                use: ["file-loader?name=assets/images/[name][hash].[ext]",
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {}
+                    }]
             }, {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
@@ -68,7 +65,7 @@ module.exports = {
 
         new ExtractTextPlugin('[name].css'),
 
-        new HtmlWebpackPlugin({template: 'src/index.html'})
+        new HtmlWebpackPlugin({ template: 'src/index.html' })
 
     ]
 
