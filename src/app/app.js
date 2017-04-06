@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./app.css";
+import TestComponent from "./test";
+import styles from "./test.scss";
 
 
 
@@ -7,12 +8,15 @@ class AppComponent extends React.Component {
 
     render() {
         return (
-            <div className={styles.heading}>
+            <section>
                 <img src={require("../assets/logo.png")} alt=""/>
-                <div>
-                    Hello world
-                </div>
-            </div>
+                
+                    <div className={styles.heading}>
+                        Hello World 
+                    </div>
+                
+                    <TestComponent />
+            </section>
 
         )
     }

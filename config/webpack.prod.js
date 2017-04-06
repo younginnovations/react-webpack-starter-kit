@@ -2,6 +2,10 @@ var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
+
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
 
@@ -19,17 +23,24 @@ module.exports = webpackMerge(commonConfig, {
 
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
- 
-    new webpack.optimize.UglifyJsPlugin({ 
+    // new ExtractTextPlugin('[name].[hash].css'),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
       mangle: {
         keep_fnames: true
       }
     }),
-    new ExtractTextPlugin('[name].[hash].css'),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'ENV': JSON.stringify(ENV)
-      }
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: {
+        discardComments: { removeAll: true }
+      },
+      canPrint: false,
     })
+
   ]
 });

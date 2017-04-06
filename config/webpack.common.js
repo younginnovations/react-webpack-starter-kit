@@ -34,8 +34,12 @@ module.exports = {
                     }]
             }, {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }, {
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]--[hash:base64:5]',
+                })
+            }
+            , {
                 test: /(\.scss)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -45,7 +49,7 @@ module.exports = {
                             options: {
                                 sourceMap: true,
                                 modules: true,
-                                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                                localIdentName: '[name]__[local]--[hash:base64:5]'
 
                             }
                         },
@@ -72,7 +76,10 @@ module.exports = {
                 name: ['app', 'vendor']
             }),
 
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin({
+            filename: 'app.css',
+            allChunks: true
+        }),
 
         new HtmlWebpackPlugin({ template: 'src/index.html' })
 
