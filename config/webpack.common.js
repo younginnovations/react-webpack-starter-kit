@@ -25,18 +25,35 @@ module.exports = {
                         presets: ['react', 'es2015']
                     }
                 }
-            }, {
-                test: /\.(jpg|png|gif)$/,
-                use: ["file-loader?name=assets/images/[name][hash].[ext]",
+            },
+            {
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 50000,
+                    mimetype: 'application/font-woff',
+                    name: 'name=assets/fonts/[name].[ext]',
+                },
+            },
+            {
+                test: /\.(jpg|png|gif|svg)$/,
+                use: ["file-loader?name=assets/images/[name].[ext]",
                     {
                         loader: 'image-webpack-loader',
                         options: {}
                     }]
-            }, {
+            },
+
+            // {
+            //     test: /\.(ttf|eot|woff|woff2)$/,
+            //     loader: 'file-loader?name=assets/fonts/[name][hash].[ext]'
+            // },
+            {
                 test: /\.css$/,
+                exclude: /(node_modules|bower_components)/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]--[hash:base64:5]',
+                    loader: 'css-loader&importLoaders=1',
                 })
             }
             , {
@@ -47,9 +64,7 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: true,
-                                modules: true,
-                                localIdentName: '[name]__[local]--[hash:base64:5]'
+                                sourceMap: true
 
                             }
                         },

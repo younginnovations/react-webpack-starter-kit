@@ -1,10 +1,9 @@
 {
-  "name": "op-ppitm",
+  "name": "React-webpack-starter",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --port 8082",
-    "test": "karma start",
+    "start": "webpack-dev-server --progress --port 5200",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "license": "MIT",
@@ -26,13 +25,16 @@
     "optimize-css-assets-webpack-plugin": "^1.3.0",
     "postcss-loader": "^1.3.3",
     "react-css-modules": "^4.2.0",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.13.1",
+    "tabletop": "^1.5.1",
     "url-loader": "^0.5.8",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.1",
-    "webpack-merge": "^3.0.0"
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "react": "^15.4.2",

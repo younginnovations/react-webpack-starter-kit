@@ -1,9 +1,9 @@
+//Variable
+@import "helpers/variables";
 
+//Component
+@import "components/fonts";
 
 body{
-    background: yellow;
-}
-
-h2{
-    color: orange;
+    font-family: $font-Regular;
 }
