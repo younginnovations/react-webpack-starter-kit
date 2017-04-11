@@ -1,11 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Links = (props) => (
-    <nav>
-        <Link to="/">home</Link>
-        <Link to="/about">about</Link>
-    </nav>
+
+
+<nav className="navbar">
+
+    <ul id="nav">
+
+        <li>
+           <NavLink exact to="/" activeClassName="active">Home</NavLink>
+        </li>
+        <li>
+            <NavLink to="/about" activeClassName="active">About</NavLink>
+        </li>
+
+    </ul>
+
+</nav>
+
 );
 
 

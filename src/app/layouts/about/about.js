@@ -6,7 +6,6 @@ class AboutComponent extends React.Component {
     render() {
         return (
             <div>
-                About Component
             </div>
 
         )
