@@ -1,7 +1,7 @@
 
 # React Webpack Starter Kit
 
-This starter kit is designed to get you up and running with with react.js, built on top of webpack module bundler. It is already setup to provide hot reloading, CSS preprocessing with PostCSS and SASS, CSS modules, image optimization and more. 
+This starter kit is designed to get you up and running with react.js, built on top of webpack module bundler. It is already setup to provide hot reloading, CSS preprocessing with PostCSS and SASS, CSS modules, image optimization and more. 
 
 
 ## Installation
