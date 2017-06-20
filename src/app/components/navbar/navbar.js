@@ -1,12 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import CSSModules from 'react-css-modules';
+import style from "./navbar.scss";
 
 const Links = (props) => (
 
 
 <nav className="navbar">
 
-    <ul id="nav">
+    <ul styleName="nav">
 
         <li>
            <NavLink exact to="/" activeClassName="active">Home</NavLink>
@@ -22,4 +24,4 @@ const Links = (props) => (
 );
 
 
-export default Links;
+export default CSSModules(Links, style, {allowMultiple: true});

@@ -6,7 +6,6 @@ const helpers = require('./helpers');
 
 module.exports = {
     entry: {
-        'vendor': './src/vendor.js',
         'app': './src/main.js'
     },
 
@@ -44,10 +43,6 @@ module.exports = {
                     }]
             },
 
-            // {
-            //     test: /\.(ttf|eot|woff|woff2)$/,
-            //     loader: 'file-loader?name=assets/fonts/[name][hash].[ext]'
-            // },
             {
                 test: /\.css$/,
                 exclude: /(node_modules|bower_components)/,
@@ -58,25 +53,72 @@ module.exports = {
             }
             , {
                 test: /(\.scss)$/,
+                include: helpers.root('src/app'),
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: true
-
+                                sourceMap: true,
+                                modules: true,
+                                localIdentName: '[local]___[hash:base64:5]'
                             }
                         },
                         {
                             loader: 'postcss-loader',
                             options: {
                                 plugins: function () {
-                                    return [require('autoprefixer')];
+                                    return [
+                                        require('autoprefixer'),
+                                        require('lost')
+                                    ];
                                 }
                             }
                         },
-                        'sass-loader?sourceMap=map'
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+
+                        }
+                        // 'sass-loader?sourceMap=map'
+                    ]
+                })
+            },
+
+            {
+                test: /(\.scss)$/,
+                include: helpers.root('src/styles'),
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: function () {
+                                    return [
+                                        require('autoprefixer'),
+                                        require('lost')
+                                    ];
+                                }
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+
+                        }
+                        // 'sass-loader?sourceMap=map'
                     ]
                 })
             }
@@ -88,7 +130,8 @@ module.exports = {
         new webpack
             .optimize
             .CommonsChunkPlugin({
-                name: ['app', 'vendor']
+                name: 'vendor',
+                minChunks: ({resource}) => /node_modules/.test(resource),
             }),
 
         new ExtractTextPlugin({
@@ -96,8 +139,13 @@ module.exports = {
             allChunks: true
         }),
 
-        new HtmlWebpackPlugin({ template: 'src/index.html' })
+        new HtmlWebpackPlugin({template: 'src/index.html'})
 
-    ]
+    ],
+
 
 }
+
+
+
+
